@@ -9,14 +9,14 @@ pipeline {
         DOCKER_PASSWORD = credentials('dockerhub')
     }
 
-    stages {
-        stage('Checkout') {
-            steps {
-                echo 'Cloning repository manually...'
-                sh 'rm -rf *'
-                sh 'git clone -b main https://github.com/hibavt/task2-elevate-labs-jenkins-pipeline.git .'
-            }
-        }
+    stage('Checkout') {
+    steps {
+        echo 'Cleaning workspace...'
+        deleteDir()
+        echo 'Cloning repository manually...'
+        sh 'git clone -b main https://github.com/hibavt/task2-elevate-labs-jenkins-pipeline.git .'
+    }
+}
 
         stage('Build') {
             steps {
