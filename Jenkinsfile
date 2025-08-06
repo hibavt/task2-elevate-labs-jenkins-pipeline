@@ -6,7 +6,7 @@ pipeline {
 
     environment {
         DOCKER_USERNAME = 'ayishahiba'
-        DOCKER_PASSWORD = credentials('dockerhub')
+        DOCKER_PASSWORD = credentials('dockerhub') // Docker Hub Access Token stored in Jenkins
     }
 
     stages {
@@ -37,8 +37,9 @@ pipeline {
             steps {
                 echo 'Building Docker image...'
                 sh "docker build -t ${DOCKER_USERNAME}/jenkins-demo-app ."
+                
                 echo 'Pushing Docker image to Docker Hub...'
-                sh 'echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin'
+                sh 'echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin https://index.docker.io/v1/'
                 sh "docker push ${DOCKER_USERNAME}/jenkins-demo-app"
             }
         }
