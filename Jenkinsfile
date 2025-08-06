@@ -38,7 +38,7 @@ pipeline {
                 echo 'Building Docker image...'
                 sh "docker build -t ${DOCKER_USERNAME}/jenkins-demo-app ."
                 echo 'Pushing Docker image to Docker Hub...'
-                sh 'echo $DOCKER_PASSWORD | docker login -u $DOCKER_USERNAME --password-stdin'
+                sh 'echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin'
                 sh "docker push ${DOCKER_USERNAME}/jenkins-demo-app"
             }
         }
