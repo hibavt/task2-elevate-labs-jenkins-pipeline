@@ -12,8 +12,9 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-                // Manually checkout repo
-                git branch: 'main', url: 'https://github.com/hibavt/task2-elevate-labs-jenkins-pipeline.git'
+                echo 'Cloning repository manually...'
+                sh 'rm -rf *'
+                sh 'git clone -b main https://github.com/hibavt/task2-elevate-labs-jenkins-pipeline.git .'
             }
         }
 
